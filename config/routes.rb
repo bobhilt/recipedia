@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'pages#home'
+  root 'pages#home'
   get '/home', to: 'pages#home'
 
   resources :recipes do
@@ -8,4 +8,6 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :chefs, except: [:new] 
+  get '/register', to: 'chefs#new'
 end
