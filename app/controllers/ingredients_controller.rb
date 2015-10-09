@@ -4,8 +4,7 @@ class IngredientsController < ApplicationController
   def show
     @ingredient = Ingredient.find(params[:id])
     @title = "Recipes using: " + @ingredient.name
-    @pagination = @ingredient.recipes.paginate(page: params[:page], per_page: 3)
-    @recipes = @ingredient.recipes
+    @recipes = @ingredient.recipes.paginate(page: params[:page], per_page: 3)
   end
   
   def new

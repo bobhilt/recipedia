@@ -6,9 +6,13 @@ Rails.application.routes.draw do
     member do
       post 'like'
     end
+    resources :reviews, shallow: true
   end
 
-  resources :chefs, except: [:new, :destroy] 
+  resources :chefs, except: [:new, :destroy] do
+      resources :reviews, only: [:index, :show]
+  end
+  
   get '/register', to: 'chefs#new'
   get '/login', to: 'logins#new'
   post '/login', to: 'logins#create'

@@ -3,9 +3,8 @@ class StylesController < ApplicationController
   
   def show
     @style = Style.find(params[:id])
-    @recipes = @style.recipes
     @title = "Recipes for style: " + @style.name
-    @pagination = @style.recipes.paginate(page: params[:page], per_page: 4)
+    @recipes = @style.recipes.paginate(page: params[:page], per_page: 4)
   end
   
   def new

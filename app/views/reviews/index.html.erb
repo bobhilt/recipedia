@@ -1,0 +1,21 @@
+<%= render 'shared/page_title', title: @title %>
+
+<%= will_paginate @reviews %>
+<%= "#{reviews.count} Reviews for #{@recipe.name} by chef #{@recipe.chef.name}" %>
+<% if @reviews.any? %>
+  <% @reviews.each do |review| %>
+    <div class="row">
+      <div class="col-md-2">
+      </div>
+      <div class="col-lg-6 well">
+        <h4><%= link_to review.name, recipe_path(recipe) %></h4>
+        <p><%= "Review by: " + link_to ("review.chef.chefname", chef_path(review.chef)) + " - #{review.summary}" %></p>
+        <p><%= review.description %></p>
+        <span class='quiet'><small>Created: <%= time_ago_in_words(recipe.created_at) %> ago, </small></span>
+        <span class='quiet'><small>Updated: <%= time_ago_in_words(recipe.updated_at) %> ago</small></span>
+      </div>
+    </div>    
+    <hr/>
+  <% end %>
+<% end %>
+<%= will_paginate @reviews %>

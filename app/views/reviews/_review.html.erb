@@ -1,0 +1,13 @@
+  <div class="row">
+    <div class="col-lg-12 well">
+      <h4><%= link_to review.chef.chefname, chef_path(review.chef) %></h4>
+      <p><strong><%= review.summary %></strong></p>
+      <hr/>
+      <p><%= review.description %></p>
+        <span class='quiet'><small>Created: <%= time_ago_in_words(review.created_at) %> ago, </small></span>
+        <span class='quiet'><small>Updated: <%= time_ago_in_words(review.updated_at) %> ago</small></span>
+      </p>
+    </div>
+  </div>    
+  <hr/>
+<will_paginate @reviews>

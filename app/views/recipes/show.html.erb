@@ -19,8 +19,12 @@
       <%= image_tag(@recipe.picture.url, class: "gravatar") if @recipe.picture? %>
     </div>
     <div class="well">
-      <p>Styles: <%= render @recipe.styles %></p>
-      <p>Ingredientes: <%= render @recipe.ingredients %></p>
+      <% if @recipe.styles.any? %>
+        <p>Styles: <%= render @recipe.styles %></p>
+      <% end %>
+      <% if @recipe.ingredients.any? %>
+        <p>Ingredientes: <%= render @recipe.ingredients %></p>
+      <% end %>
       <p>
         <strong>Steps:</strong>
       </p>
@@ -36,4 +40,24 @@
     </div>
   </div>
 </div>
-<h5><%= link_to "Return to Recipes", recipes_path, class: "btn btn-warning btn-small"  %></h5>
+<h5><%= link_to "Return to Recipes", recipes_path, class: "btn btn-warning btn-small"  %>
+<hr/>
+</h5>
+
+  <div class = "row">
+    <div class = "col-lg-8 col-offset-2 well">
+      <%= "@current_user_review: #{@current_user_review}, chef_id: #{@current_user}" %>
+      
+      <h1><%= "#{@recipe.reviews.count.to_s} Reviews for #{@recipe.name} " %></h1>
+
+      <% if @current_user_review.nil? %>
+        <%= link_to "Write a review", new_recipe_review_path(@recipe), class: "btn btn-success" %>
+      <% else %>
+        <%= link_to "Edit your review", edit_recipe_review_path(@current_user_review), class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+<% if @recipe.reviews.any? %>
+  <hr/>
+  <%= render @recipe.reviews %>
+<% end %>
