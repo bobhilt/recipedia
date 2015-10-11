@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
   
   before_action :require_user, except: [:index, :show]
-  before_action :set_current_user_reviews , only: [:edit, :update, :show, :index]
 
   def new
     @recipe = Recipe.find(params[:recipe_id])
@@ -25,23 +24,34 @@ class ReviewsController < ApplicationController
   def index
     @title = "Reviews"
     @reviews = @recipe.reviews.paginate(page: params[:page], per_page: 1)
-
   end
   
   def edit
-    
+    binding.pry
+    @review = Review.find(params[:id])
+    #@recipe = Recipe.find(@review.recipe_id)
+  end
+
+  def update
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
+      flash[:success] = "Review successfully updated."
+      redirect_to recipe_path(@review.recipe_id)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    review = Review.find(params[:id])
+    recipe = Recipe.find(review.recipe_id)
+    review.destroy
+    flash[:success] = "Review Deleted"
+    redirect_to recipe_path(recipe)
   end
 
   private
     def review_params
       params.require(:review).permit(:summary, :description)
-    end
-    
-    def set_current_user_reviews
-      if logged_in?
-        @current_user_reviews = @reviews.select {|r| r.chef_id == @current_user.id}
-      else
-        @current_user_review = nil
-      end
     end
 end

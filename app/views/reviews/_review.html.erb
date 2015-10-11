@@ -4,6 +4,11 @@
       <p><strong><%= review.summary %></strong></p>
       <hr/>
       <p><%= review.description %></p>
+      <div class="row">
+        <% if current_user.present? && (current_user.admin? or current_user.id == review.chef_id) %>
+          <%= link_to "Delete", review_path(review), method: :delete, data: { confirm: "Confirm delete?" }, class: "btn btn-warning btn-small" %>
+        <% end %>
+      </div>
         <span class='quiet'><small>Created: <%= time_ago_in_words(review.created_at) %> ago, </small></span>
         <span class='quiet'><small>Updated: <%= time_ago_in_words(review.updated_at) %> ago</small></span>
       </p>
