@@ -11,6 +11,9 @@ class RecipesController < ApplicationController
   end
   
   def show
+    @reviews = Recipe.find(params[:id]).reviews.paginate(page: params[:page], per_page: 2)
+#    @reviews = @recipe.Review.paginate(page: params[:page], per_page: 2)
+    
   end
   
   def new

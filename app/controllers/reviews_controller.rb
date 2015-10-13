@@ -23,13 +23,13 @@ class ReviewsController < ApplicationController
   
   def index
     @title = "Reviews"
-    @reviews = @recipe.reviews.paginate(page: params[:page], per_page: 1)
+#    @reviews = @recipe.Review.paginate(page: params[:page], per_page: 2)
+#    @reviews = Review.paginate(page: params[:page], per_page: 1)
+    
   end
   
   def edit
-    binding.pry
     @review = Review.find(params[:id])
-    #@recipe = Recipe.find(@review.recipe_id)
   end
 
   def update
