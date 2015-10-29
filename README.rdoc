@@ -1,12 +1,15 @@
-testing specs for recipes:
-name: string
-summary: text
-description: text
+=README
 
-- name must be present
-- name must be beween 5 and 100 characters
-- summary must be present
-- summary must be between 10 and 150 characters
-- description must be present
-- description must be between 20 and 500 characters
-- chef_d must be present
+== Recipedia 
+A recipe manager Rails learning app for the <b>Professional Ruby on Rails Developer</b> Course. 
+
+* Ruby version 2.2.1p85 (2015-02-26 revision 49769) [x86_64-darwin14]
+
+* System dependencies
+  Uses AWS for image storage, Gravatar for user avatar
+* Configuration
+ AWS S3 environment keys: config/initializers/carrier_wave.rb
+To Do:
+* Offer avatar file uploads (store to S3, via carrier_wave)
+* Change likes/dislikes to 5-star ratings
+* Markup options for reviews. 
